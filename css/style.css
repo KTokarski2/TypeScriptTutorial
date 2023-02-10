@@ -57,4 +57,18 @@ label {
     display: block;
 }
 
+li {
+    align-items: center;
+    display: flex;
+    list-style-type: none;
+}
+
+.categories input {
+    margin-right: 8px;
+}
+
+.tasks input {
+    margin-left: 8px;
+}
+
 
