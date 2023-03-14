@@ -71,4 +71,21 @@ li {
     margin-left: 8px;
 }
 
+.general {
+    color: yellow;
+}
+
+.work {
+    text-decoration: underline;
+    color: red;
+}
+
+.gym {
+    color: blueviolet;
+}
+
+.hobby {
+    color: blue;
+}
+
 

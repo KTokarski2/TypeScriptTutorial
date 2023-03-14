@@ -15,21 +15,28 @@ const tasksContainerElement: HTMLElement = document.querySelector(".tasks");
 const addButtonElement: HTMLButtonElement = document.querySelector("button");
 const taskNameInputElement: HTMLInputElement = document.querySelector("#name");
 
-const tasks: {
+interface Task {
     name: string;
     done: boolean;
-}[] = [
+    category?: string;
+}
+
+const categories: string[] = ["general", "work", "gym", "hobby"];
+
+const tasks: Task[] = [
     {
-    name: "Buy milk",
-    done: true
+        name: "Buy milk",
+        done: true,
+        category: "general"
     },
     {
-    name: "Take dog for a walk",
-    done: false
+        name: "Take dog for a walk",
+        done: true,
     },
     {
-    name: "Prepare diner",
-    done: false
+        name: "Prepare diner",
+        done: false,
+        category: "general"
     }
 ];
 
@@ -40,6 +47,9 @@ const render = () => {
     tasksContainerElement.innerHTML = "";
     tasks.forEach((task, index) => {
         const taskElement: HTMLElement = document.createElement("li");
+        if (task.category) {
+            taskElement.classList.add(task.category);
+        }
         const id: string = `task-${index}`;
         const labelElement: HTMLElement = document.createElement("label");
         labelElement.innerText = task.name;
@@ -60,14 +70,14 @@ const render = () => {
     });
 };
 
-const addTask = (task: string) => {
-    tasks.push({name: task, done: false});
+const addTask = (task: Task) => {
+    tasks.push(task);
 };
 
 addButtonElement.addEventListener("click", (event:Event) => {
     event.preventDefault();
-    addTask(taskNameInputElement.value);
+    addTask({name: taskNameInputElement.value, done: false});
     render();
 });
-
+addTask({name: "Martwy ciąg", category: "gym", done: false});
 render();

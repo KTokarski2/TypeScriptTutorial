@@ -12,24 +12,30 @@
 const tasksContainerElement = document.querySelector(".tasks");
 const addButtonElement = document.querySelector("button");
 const taskNameInputElement = document.querySelector("#name");
+const categories = ["general", "work", "gym", "hobby"];
 const tasks = [
     {
         name: "Buy milk",
-        done: true
+        done: true,
+        category: "general"
     },
     {
         name: "Take dog for a walk",
-        done: false
+        done: true,
     },
     {
         name: "Prepare diner",
-        done: false
+        done: false,
+        category: "general"
     }
 ];
 const render = () => {
     tasksContainerElement.innerHTML = "";
     tasks.forEach((task, index) => {
         const taskElement = document.createElement("li");
+        if (task.category) {
+            taskElement.classList.add(task.category);
+        }
         const id = `task-${index}`;
         const labelElement = document.createElement("label");
         labelElement.innerText = task.name;
@@ -48,11 +54,12 @@ const render = () => {
     });
 };
 const addTask = (task) => {
-    tasks.push({ name: task, done: false });
+    tasks.push(task);
 };
 addButtonElement.addEventListener("click", (event) => {
     event.preventDefault();
-    addTask(taskNameInputElement.value);
+    addTask({ name: taskNameInputElement.value, done: false });
     render();
 });
+addTask({ name: "Martwy ciąg", category: "gym", done: false });
 render();
